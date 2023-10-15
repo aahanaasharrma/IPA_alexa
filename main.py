@@ -69,10 +69,23 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == '1':
-            title = input("Enter task title: ")
+            while True:
+                title = input("Enter task title: ")
+                if title.strip():  # Check if the title is not empty after stripping whitespace
+                    break
+                else:
+                    print("Task title cannot be empty. Please enter a valid title.")
+
             description = input("Enter task description: ")
-            completed = input("Is the task completed? (y/n): ")
-            if completed.lower() == 'y':
+
+            while True:
+                completed = input("Is the task completed? (y/n): ").lower()
+                if completed in ('y', 'n'):
+                    break
+                else:
+                    print("Invalid input. Please enter 'y' for completed or 'n' for not completed.")
+
+            if completed == 'y':
                 task_manager.add_task(title, description, completed=True)
             else:
                 task_manager.add_task(title, description)
